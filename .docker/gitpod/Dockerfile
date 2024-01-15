@@ -6,8 +6,6 @@ USER root
 
 RUN apt-get update && apt-get install sudo git curl git bash-completion python3 python3-pip racket default-jdk default-jre -y && apt-get clean
 
-RUN raco pkg install --auto forge froglet
-
 RUN useradd -l -u 33333 -G sudo -md /home/gitpod -s /bin/bash -p gitpod gitpod \
     # passwordless sudo for users in the 'sudo' group
     && sed -i.bkp -e 's/%sudo\s\+ALL=(ALL\(:ALL\)\?)\s\+ALL/%sudo ALL=NOPASSWD:ALL/g' /etc/sudoers
