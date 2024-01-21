@@ -23,7 +23,5 @@ ENV VSCODE_API_VERSION="1.50.0"
 # ssh to github once to bypass the unknown fingerprint warning
 RUN ssh -o StrictHostKeyChecking=no github.com || true
 
-RUN setup.sh
-
 # run sudo once to suppress usage info
 RUN sudo echo finished
