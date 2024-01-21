@@ -1,0 +1,9 @@
+#lang basic-demo-nth
+10 GOSUB 50
+15 PRINT "2 of 3"
+17 GOSUB 30
+20 END
+30 PRINT "3 of 3"
+40 RETURN
+50 PRINT "1 of 3"
+55 RETURN

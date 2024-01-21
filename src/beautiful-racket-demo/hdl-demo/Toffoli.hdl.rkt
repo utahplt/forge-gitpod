@@ -1,0 +1,13 @@
+#lang hdl-demo
+
+CHIP And {
+          IN a, b;
+             OUT out;
+             
+             PARTS:
+             Nand(a=a, b=b, out=nandout);
+             Not(in=nandout, out=out);
+             }
+
+
+

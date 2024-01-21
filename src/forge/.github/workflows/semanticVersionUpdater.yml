@@ -1,0 +1,42 @@
+name: Semantic Version Updater
+
+on:
+  pull_request:
+    types: [closed]
+    branches:
+    - 'main'
+
+jobs:
+  semantic-version-update:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+        fetch-depth: 0
+    - name: Set git configs
+      run: git config --global push.followTags true
+    - name: Set up Python ${{matrix.python-version}}
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.8'
+        architecture: 'x64'
+    - name: Get version
+      run: echo "UPDATE_TYPE=$(python .github/workflows/semanticVersionUpdater/get-update-type.py "${{ github.event.pull_request.title }}")" >> $GITHUB_ENV
+    - name: Update version
+      run: echo "NEW_VERSION=$(python .github/workflows/semanticVersionUpdater/read-version.py forge/info.rkt $UPDATE_TYPE)" >> $GITHUB_ENV
+    - name: Commit files
+      run: |
+        git add .
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "Bump version to v$NEW_VERSION" -a
+        git tag -a "v$NEW_VERSION" -m "${{ github.event.pull_request.title }}"
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: ${{ github.ref }}

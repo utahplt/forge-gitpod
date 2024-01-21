@@ -1,0 +1,26 @@
+#lang s-exp "expander.rkt"
+(bf-program
+  (bf-op "+")
+  (bf-op "+")
+  (bf-op "+")
+  (bf-op "+")
+  (bf-op "+")
+  (bf-op "+")
+  (bf-op "+")
+  (bf-op "+")
+  (bf-loop
+   "["
+   (bf-op ">")
+   (bf-op "+")
+   (bf-op "+")
+   (bf-op "+")
+   (bf-op "+")
+   (bf-op "+")
+   (bf-op "+")
+   (bf-op "+")
+   (bf-op "+")
+   (bf-op "<")
+   (bf-op "-")
+   "]")
+  (bf-op ">")
+  (bf-op "."))

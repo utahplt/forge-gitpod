@@ -1,0 +1,8 @@
+(define (30) (rem print "'ignored'"))
+(define (35) (void))
+(define (50) (print "never gets here"))
+(define (40) (end))
+(define (60) (print "three") (print (+ 1.0 3)))
+(define (70) (goto (+ 11 18.5 0.5)))
+(define (10) (print "one"))
+(define (20) (print) (goto 60) (end))
